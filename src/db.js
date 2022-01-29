@@ -3,7 +3,7 @@ const users = [
       id: '1',
       name: 'Benji',
       lastName: 'Martinez',
-      email: 'benjim.flores@outlook.com',
+      email: 'benjim@gmail.com',
     },
     {
       id: '2',
