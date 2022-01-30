@@ -71,6 +71,16 @@ const Mutation = {
 
         // Retornamos el author con su datos actualizados para mostrar al frontend
         return {...authorExist, ...data}
+    },
+
+    createBook:  (parent, args, { db }, info ) => {
+        const book = {
+            id: uuidv4(),
+            ...args
+        }
+        db.books.push(book)
+
+        return book
     }
 }
 
