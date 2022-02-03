@@ -5,33 +5,48 @@ const Query = {
         return `Hello ${name || 'GraphQL'}`
     },
     quantity: () => 1,
+    
     // Busca Usuarios
     user: (parent, args, ctx, info) => { 
         const { id } = args;
-        const { db } = ctx;
+        const { prisma } = ctx;
 
         if (!id){
-            return db.users
+            // return prisma.users
+            return prisma.users.findMany()
         }
 
-        return db.users.filter( user => user.id === args.id )
+        // return prisma.users.filter( user => user.id === args.id )
+        return prisma.users.findOne({
+            where: {
+                id,
+            },
+        })
     },
     // Busca Authores
-    author: (parent, { id }, { db }, info) => {
+    author: (parent, { id }, { prisma }, info) => {
         if (!id) {
-            return db.authors
+            return prisma.authors.findMany()
         }
 
-        return db.authors.filter( author => author.id === id)
+        return prisma.authors.findOne({
+            where: {
+                id: Number(id),
+            },
+        })
     },
 
     // Busca Libros
-    book: (parent, { id }, { db }, info) => {
+    book: (parent, { id }, { prisma }, info) => {
         if (!id) {
-            return db.books
+            return prisma.books.findMany()
         }
 
-        return db.books.filter( book => book.id === id)
+        return prisma.books.findOne({
+            where: {
+                id: Number(id),
+            },
+        })
     },
 
 }

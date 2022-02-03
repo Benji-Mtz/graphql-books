@@ -1,12 +1,22 @@
 const Book = {
-    writted_by: (parent, args, { db }, info) => {
-    
-        return db.authors.find( author => author.id === parent.writted_by)
+    writted_by: async (parent, args, { prisma }, info) => {
+        // return db.authors.find( author => author.id === parent.writted_by)
+        return await prisma.books
+        .findOne({
+            where: {
+                id: parent.id,
+            },
+        }).authors()
     },
 
-    register_by: (parent, args, { db }, info) => {
+    register_by: async (parent, args, { prisma }, info) => {
     
-        return db.users.find( users => users.id === parent.register_by)
+        return await prisma.books
+        .findOne({
+            where: {
+                id: parent.id,
+            },
+        }).users()
     },
 }
 

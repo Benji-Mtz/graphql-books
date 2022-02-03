@@ -2,12 +2,11 @@ import { GraphQLServer } from 'graphql-yoga';
 import Query from './resolvers/Query';
 import Author from './resolvers/Author';
 import Book from './resolvers/Book';
-
 import Mutation from './resolvers/Mutation';
-
+import { PrismaClient } from '@prisma/client';
 
 import db from './db';
-
+const prisma = new PrismaClient();
 
 const resolvers = {
     Query,
@@ -16,7 +15,10 @@ const resolvers = {
     Mutation,
 };
 
-const context = { db };
+const context = { 
+    db,
+    prisma
+};
 
 const server = new GraphQLServer({
     typeDefs: './src/schema.graphql',

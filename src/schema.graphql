@@ -9,7 +9,7 @@ type Query {
 type User {
     id: ID!
     name: String!
-    lastName: String!
+    lastname: String!
     email: String!
 }
 type Author {
@@ -31,35 +31,64 @@ type Book {
 
 type Mutation {
     createUser(
-        name: String!
-        lastName: String!
-        email: String!
-        password: String!
+        data: createUserInput
     ): User!
     updateUser(
         id: ID!
-        name: String
-        lastName: String
-        email: String
-        password: String
+        data: updateUserInput
     ): User!
     createAuthor(
-        name: String!
-        country: String!
-        register_by: ID!
+        data: createAuthorInput
     ): Author!
     updateAuthor(
         id: ID!
-        name: String
-        country: String
-        register_by: ID
+        data: updateAuthorInput
     ):Author!
     createBook(
-        title: String!
-        description: String!
-        quantity: Int!
-        price: Int!
-        writted_by: ID!
-        register_by: ID!
+        data: createBookInput
     ):Book!
+    updateBook(
+        id: ID!
+        data: updateBookInput
+    ): Book!
+    deleteBook(
+        id: ID!
+    ):Book!
+}
+
+input createUserInput {
+    name: String!
+    lastname: String!
+    email: String!
+}
+input updateUserInput {
+    name: String
+    lastname: String
+    email: String
+}
+input createAuthorInput {
+    name: String!
+    country: String!
+    register_by: ID!
+}
+input updateAuthorInput {
+    name: String
+    country: String
+    register_by: ID
+}
+input createBookInput {
+    title: String!
+    description: String!
+    quantity: Int!
+    price: Int!
+    writted_by: ID!
+    register_by: ID!
+}
+input updateBookInput {
+    title: String
+    description: String
+    quantity: Int
+    price: Int
+    writted_by: ID
+    register_by: ID
 }
